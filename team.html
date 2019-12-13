@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Football News</title>
+    <meta name="description" content="My first PWA" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/materialize.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#00897B" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+       <!-- Navigasi -->
+    <nav class="grey darken-3" role="navigation">
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo" id="logo-container">
+          
+        </a>
+        <div class="right-align">
+            <a href="./#home">
+              <ul><i class="medium material-icons">close</i>
+            </a>
+        </div>
+      </div>
+    </nav>
+    <!-- Akhir Navigasi -->
+
+    <!-- Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m12">
+          <div class="card">
+            <div class="card-content">
+              <div id="detail-team"></div>
+              <div id="squad">
+                <ul class="collapsible">
+                  <li>
+                    <div class="collapsible-header center orange-text darken-4-text"><i class="material-icons">directions_run</i>SQUAD<i class="material-icons">expand_more</i></div>
+                    <div class="collapsible-body">
+                    <table class="striped">
+                      <thead>
+                        <tr>
+                            <th width="30%" class="center-align">Shirt Number</th>
+                            <th width="45%">Name</th>
+                            <th width="25%">Position</th>
+                        </tr>
+                      </thead>
+                      <tbody id="squad-detail">
+                      </tbody>
+                    </table>
+
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="player" class="modal">
+    <div class="modal-content">
+        <div class="container">
+            <h5 class="orange-text darken-4-text" id="name"></h5>
+            <table>
+              <tr>
+                  <td>First Name</td>
+                  <td id="f-name"></td>
+              </tr>
+              <tr>
+                  <td>Last Name</td>
+                  <td id="l-name"></td>
+              </tr>
+              <tr>
+                  <td>County of Birth</td>
+                  <td id="country-birth"></td>
+              </tr>
+              <tr>
+                  <td>Date Of Birth</td>
+                  <td id="date-birth"></td>
+              </tr>
+              <tr>
+                  <td>Nationality</td>
+                  <td id="nationality"></td>
+              </tr>
+              <tr>
+                  <td>Position</td>
+                  <td id="position"></td>
+              </tr>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button data-target="detail-match"  class="btn modal-close red darken-3">Close</button>
+    </div>
+  </div>
+
+
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/snarkdown@1.0.2/dist/snarkdown.umd.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/team.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+      // REGISTER SERVICE WORKER
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then(function() {
+              console.log("Pendaftaran ServiceWorker berhasil");
+            })
+            .catch(function() {
+              console.log("Pendaftaran ServiceWorker gagal");
+            });
+        });
+      } else {
+        console.log("ServiceWorker belum didukung browser ini.");
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        getTeamDetail();
+      });
+
+      // SQUAD
+      $(document).ready(function(){
+        $('.collapsible').collapsible();
+      });
+
+      //Modal
+      $(document).ready(function() {
+          $('#player').modal();
+      });
+    </script>
+  </body>
+</html>

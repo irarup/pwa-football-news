@@ -1,0 +1,37 @@
+#SceduledMatch .card-title{
+	height: 80px;
+	overflow: hidden;
+}
+
+.modal .modal-content {
+    padding: 0px !important;
+    overflow-y: scroll;;
+}
+
+.modal .modal-footer {
+    padding-right: 15px;
+}
+
+#detail-team #logo{
+	height: 150px;
+	width: auto;
+	padding-top: 15px;
+}
+
+.collapsible-header{
+	display: block !important;
+}
+
+.collapsible-header i{
+	padding-left: 15px !important;
+	padding-right: 20px !important;
+}
+
+/* Filter Match*/
+#filter a{
+	width: 100%;
+}
+
+.empty{
+	padding: 50px;
+}

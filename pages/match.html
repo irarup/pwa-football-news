@@ -1,0 +1,24 @@
+<div class="container-fluid">
+
+  <h3 class="center-align" style="text-decoration: underline">Matches Page</h3>
+  <h6 class="center-align" id="update"></h6>
+  <hr>
+  <h5 class="center">Select Matches Status :</h5>
+  <div class="row" id="filter">
+      <div class="col s12 m3 l3">
+          <a href="#match" onclick="matchesData('FINISHED')" class="waves-effect orange accent-3 btn-large" id="finised"><i class="large material-icons right">check_circle</i>FINISHED</a>
+      </div>
+      <div class="col s12 m3 l3">
+          <a href="#match" onclick="matchesData('LIVE')" class="waves-effect orange accent-3 btn-large" id="live"><i class="large material-icons right">live_tv</i>LIVE</a>
+      </div>
+      <div class="col s12 m3 l3">
+          <a href="#match" onclick="matchesData('IN_PLAY')" class="waves-effect orange accent-3 btn-large" id="in_play"><i class="large material-icons right">play_circle_filled</i>IN PLAY</a>
+      </div>
+      <div class="col s12 m3 l3">
+          <a href="#match" onclick="matchesData('PAUSED')" class="waves-effect orange accent-3 btn-large" id="paused"><i class="large material-icons right">pause_circle_filled</i>PAUSED</a>
+      </div>
+  </div>
+  <hr>
+  <h4 class="center" id="show-match">Showing Of Finised Matches</h4>
+  <div class="row" id="SceduledMatch"></div>
+  <div id="no-data"></div>
