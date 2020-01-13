@@ -1,4 +1,4 @@
-const CACHE_NAME = "football-news-v1";
+const CACHE_NAME = "football-news-v3";
 var urlsToCache = [
   "/",
   "/icon.png",
@@ -10,6 +10,7 @@ var urlsToCache = [
   "/pages/home.html",
   "/pages/match.html",
   "/pages/standing.html",
+  "/pages/favorite.html",
   "/css/materialize.min.css",
   "/css/style.css",
   "/js/materialize.min.js",

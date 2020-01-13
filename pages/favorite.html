@@ -1,0 +1,22 @@
+<div class="container-fluid">
+
+  <h3 class="center-align" style="text-decoration: underline">Favorite</h3>
+  <h6 class="center-align" id="update"></h6>
+  <hr>
+  <h5 class="center">Select your Favorites :</h5>
+      <div class="row" id="filter">
+          <div class="col s12 m4 l4">
+              <a href="#match" onclick="favoriteData('match')" class="waves-effect orange accent-3 btn-large" id="in_play"><i class="large material-icons right">favorite</i>Matches</a>
+          </div>
+          <div class="col s12 m4 l4">
+              <a href="#match" onclick="favoriteData('team')" class="waves-effect orange accent-3 btn-large" id="finised"><i class="large material-icons right">favorite</i>Teams</a>
+          </div>
+          <div class="col s12 m4 l4">
+              <a href="#match" onclick="favoriteData('player')" class="waves-effect orange accent-3 btn-large" id="live"><i class="large material-icons right">favorite</i>Players</a>
+          </div>
+      </div>
+  <hr>
+  <h4 class="center" id="favTitle"></h4>
+  <div class="row" id="favoriteResult"></div>
+  <div id="no-data"></div>
+</div>

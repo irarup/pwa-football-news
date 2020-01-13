@@ -1,19 +1,18 @@
 function Matches(data){
 
-	      var matches = data.matches;
+	    var matches = data.matches;
         var jumlah = matches.length;
         var sceduledHTML = "";
         var update = data.competition.lastUpdated;
 
-        //console.log(update);
+        
         //console.log(dateFormat(update));
-
-        if(jumlah > 20){
-          jumlah = 20;
+        if (jumlah > 20) {
+            jumlah = 20;
         }
 
-        for (var i = 0; i < jumlah; i++) {
-            //console.log(matches[i]);
+        for (var i = 0 ; i < jumlah; i++) {
+            //console.log(i);
             sceduledHTML += `
                   <div class="col s12 m6 l6">
                     <div class="card">
@@ -25,7 +24,7 @@ function Matches(data){
                         <p class="flow-text center-align">
                             Match Day : ${matches[i].matchday}<br>
                         </p>
-                            <h6 class="center-align">Kick Off : `+dateFormat(matches[i].utcDate)+`</h6>
+                            <h6 class="center-align">Kick Off : `+dateFormat(matches[i].utcDate, "utc") +`</h6>
                       </div>
                       <div class="card-action right-align">
                           <button data-target="detail-match"  class="btn modal-trigger match-detail orange accent-3" onclick="detailMatch(${matches[i].id});">See Detail</button>    
@@ -33,10 +32,12 @@ function Matches(data){
                     </div>
                   </div>
               `
-        };
+        }
 
-        document.getElementById("update").innerHTML = "Last Update : " + dateFormat(update);
+        document.getElementById("update").innerHTML = "Last Update : " + dateFormat(update, "update");
         document.getElementById("SceduledMatch").innerHTML = sceduledHTML;
+
+        
 
 }
 
@@ -47,7 +48,7 @@ function MatchDetail(data){
         document.getElementById("away-team").innerHTML = data.match.awayTeam.name ;
         document.getElementById("away-team").href = "./team.html?id=" + data.match.awayTeam.id;
         document.getElementById("match-day").innerHTML = "Match Day : " + data.match.matchday;
-        document.getElementById("kick-off").innerHTML = "Kick-off : " + dateFormat(data.match.utcDate);
+        document.getElementById("kick-off").innerHTML = "Kick-off : " + dateFormat(data.match.utcDate, "utc");
         document.getElementById("venue").innerHTML = "( "+ data.match.venue + " )" ;
         document.getElementById("num-matches").innerHTML = "Number of Matches : " + data.head2head.numberOfMatches;
         document.getElementById("goal").innerHTML = "Total Goals : " + data.head2head.totalGoals;
@@ -57,6 +58,7 @@ function MatchDetail(data){
         document.getElementById("win-away").innerHTML = data.head2head.awayTeam.wins;
         document.getElementById("draw-away").innerHTML = data.head2head.awayTeam.draws;
         document.getElementById("lose-away").innerHTML = data.head2head.awayTeam.losses;
+        document.getElementById("fav-btn").setAttribute('data-id', data.match.id);
     
     var winner = data.match.score.winner;
 

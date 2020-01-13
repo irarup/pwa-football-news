@@ -1,3 +1,6 @@
+h3{
+	text-decoration: underline;
+}
 #SceduledMatch .card-title{
 	height: 80px;
 	overflow: hidden;
@@ -12,7 +15,7 @@
     padding-right: 15px;
 }
 
-#detail-team #logo{
+#detail-team .logo{
 	height: 150px;
 	width: auto;
 	padding-top: 15px;
@@ -34,4 +37,40 @@
 
 .empty{
 	padding: 50px;
+}
+
+/* Standing Table */
+#standingTable, #standingTable th, #standingTable tr, #standingTable td{
+	border: solid #b36b00 1px;
+	border-top: solid #b36b00 0.5px;
+	border-bottom: solid #b36b00 0.5px;
+}
+
+#mini-logo{
+	height: 30px;
+	width: auto;
+}
+
+.team-logo{
+	height: 150px;
+	padding: 15px;
+}
+
+@media only screen and (max-width: 815px) {
+	#finished i, #in_play i, #live i, #paused i {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	#finished i, #in_play i, #live i, #paused i {
+		display: inline;
+		float: left !important;
+		margin-right: 10%;
+	}
+
+	#finished, #in_play, #live , #paused {
+		text-align: left !important;
+	}
+
 }

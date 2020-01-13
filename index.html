@@ -55,6 +55,7 @@
     <div id="finished-match"></div>
     </div>
     <div class="modal-footer">
+        <button data-target="detail-match"  class="btn modal-close orange lighten-3 black-text" data-id="" id="fav-btn">Add to Favorite  <i class="material-icons red-text" id="fav-icon">favorite_border</i></button>
         <button data-target="detail-match"  class="btn modal-close red darken-3">Close</button>
     </div>
   </div>
@@ -63,7 +64,10 @@
   <!-- Java Script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
   <script src="js/materialize.min.js"></script>
+  <script src="js/indexedDB/idb.js"></script>
+  <script src="js/indexedDB/indexedDB.js"></script>
   <script src="js/matches.js"></script>
+  <script src="js/standing.js"></script>
   <script src="js/api.js"></script>
   <script src="js/nav.js"></script>
   <script>
@@ -89,13 +93,37 @@
         getFinisedMatch();
     });
         
-// MODAL
+  // MODAL
 
-  $(document).ready(function() {
-      $('#detail-match').modal();
-  });
+    $(document).ready(function() {
+        $('#detail-match').modal();
+    });
 
-  $('.dropdown-trigger').dropdown();
+    $('.dropdown-trigger').dropdown();
+
+  //Favorite match
+   $(document).ready(function() {
+         var btn = document.getElementById("fav-btn");
+
+
+         btn.onclick = function () {
+            var id =  btn.getAttribute('data-id');
+            var favData = detailMatch(id);
+            var isFavorite = "false";
+
+                if (checkData("match", id)) {
+                    console.log("Tombol deleteFav di click");
+                    
+                }else{
+                    favData.then(function (data) {
+                      console.log("Tombol saveFav di click");
+                      saveToFav("match", data);
+                      isFavorite = true;
+                     });
+                };
+        }
+    });
+
 
 
 </script>

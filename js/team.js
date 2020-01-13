@@ -1,22 +1,7 @@
-function birthDate(date){
-  var hari = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
-  var bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "July", "Agustus", "September", "Oktober", "November", "Desember"];
-
-  var d = new Date(date);
-  var _hari = d.getDay();
-  var _tanggal = d.getDate();
-  var _bulan = d.getMonth();
-  var _tahun = d.getYear();
-
-    var tahun = (_tahun < 1000 ) ? _tahun + 1900 : _tahun;
-    var tanggal = hari[_hari] +", " + _tanggal + " " + bulan[_bulan] + " " + tahun
-    return tanggal;
-}
-
 function teamData(data) {
       var teamHTML = `
         <div class="center-align">
-          <img src="${data.crestUrl}" id="logo">
+          <img src="${data.crestUrl}" class="logo">
           <h5 class="orange-text darken-4-text">${data.name}</h5>
         </div>
         <hr>
@@ -87,7 +72,7 @@ function playerById(data){
        document.getElementById("f-name").innerHTML = data.firstName;
        document.getElementById("l-name").innerHTML = data.lastName;
        document.getElementById("country-birth").innerHTML = data.countryOfBirth;
-       document.getElementById("date-birth").innerHTML = birthDate(data.dateOfBirth);
+       document.getElementById("date-birth").innerHTML = dateFormat(data.dateOfBirth, "birth");
        document.getElementById("nationality").innerHTML = data.nationality;
        document.getElementById("position").innerHTML = data.position;
 }

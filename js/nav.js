@@ -49,6 +49,8 @@ function loadPage(page) {
         getMatch();
       }else if (page === "match"){
         getFinisedMatch();
+      }else if (page === "standing"){
+        getStanding();
       }
 
       if (this.status == 200) {
