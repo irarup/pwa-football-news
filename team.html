@@ -61,51 +61,50 @@
       </div>
     </div>
 
+    <!-- Floating button for favorite teams -->
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red" id="team-fav"><i class="material-icons" id="fav-icon"></i></a>
+    </div>
     <!-- Modal -->
-    <div id="player" class="modal">
-    <div class="modal-content">
-        <div class="container">
-            <h5 class="orange-text darken-4-text" id="name"></h5>
-            <table>
-              <tr>
-                  <td>First Name</td>
-                  <td id="f-name"></td>
-              </tr>
-              <tr>
-                  <td>Last Name</td>
-                  <td id="l-name"></td>
-              </tr>
-              <tr>
-                  <td>County of Birth</td>
-                  <td id="country-birth"></td>
-              </tr>
-              <tr>
-                  <td>Date Of Birth</td>
-                  <td id="date-birth"></td>
-              </tr>
-              <tr>
-                  <td>Nationality</td>
-                  <td id="nationality"></td>
-              </tr>
-              <tr>
-                  <td>Position</td>
-                  <td id="position"></td>
-              </tr>
-            </table>
-        </div>
+  <div id="player" class="modal">
+    <div class="modal-content container">
+            <h5 class="orange-text darken-4-text center" id="name"></h5>
+              <div class="row">
+                  <div class="col m5 s6">First Name</div>
+                  <div class="col m7" id="f-name"></div>
+              </div>
+              <div class="row">
+                  <div class="col m5 s6">Last Name</div>
+                  <div class="col m7" id="l-name"></div>
+              </div class="row">
+              <div class="row">
+                  <div class="col m5 s6">County of Birth</div>
+                  <div class="col m7" id="country-birth"></div>
+              </div>
+              <div class="row">
+                  <div class="col m5 s6">Date Of Birth</div>
+                  <div class="col m7" id="date-birth"></div>
+              </div>
+              <div class="row">
+                  <div class="col m5 s6">Nationality</div>
+                  <div class="col m7" id="nationality"></div>
+              </div>
+              <div class="row">
+                  <div class="col m5 s6">Position</div>
+                  <div class="col m7 s6" id="position"></div>
+              </div>
     </div>
     <div class="modal-footer">
-        <button data-target="detail-match"  class="btn modal-close red darken-3">Close</button>
+        <button  class="btn orange lighten-3 black-text" data-id="" id="fav-btn"></button>
+        <button class="btn modal-close red darken-3">Close</button>
     </div>
   </div>
 
-
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/snarkdown@1.0.2/dist/snarkdown.umd.js"
-    ></script>
+    <!-- <script type="text/javascript" src="https://unpkg.com/snarkdown@1.0.2/dist/snarkdown.umd.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
     <script src="js/materialize.min.js"></script>
+    <script src="js/indexedDB/idb.js"></script>
+    <script src="js/indexedDB/indexedDB.js"></script>
     <script src="js/team.js"></script>
     <script src="js/api.js"></script>
     <script>
@@ -138,6 +137,73 @@
       $(document).ready(function() {
           $('#player').modal();
       });
+
+      //favorite team
+      $(document).ready(function() {
+          var urlParams = new URLSearchParams(window.location.search);
+          var idParam = Number(urlParams.get("id"));
+          var icon = document.getElementById("fav-icon");
+          var btn = document.getElementById("team-fav");
+
+          var isFav;
+
+          checkData("team", idParam).then(function (data){
+              if (data != undefined) {
+                    isFav = true;
+                    icon.innerHTML = "favorite";
+                }else{
+                    isFav = false;
+                     icon.innerHTML = "favorite_border";
+                };
+          }); 
+
+          if (isFav) {
+              icon.innerHTML = "favorite";
+          }else{
+              icon.innerHTML = "favorite_border";
+          };  
+
+        btn.onclick = function (){
+            var favData = getTeamDetail();
+              if (isFav) {
+                    console.log("Tombol deleteFav di click");
+                    deleteFav("team", idParam);
+                    icon.innerHTML = "favorite_border";
+                    isFav = false;
+                }else{
+                    favData.then(function (data) {
+                      console.log("Tombol saveFav di click");
+                      saveToFav("team", data);
+                    });
+                    icon.innerHTML = "favorite";
+                    isFav = true;
+                };  
+        }
+
+      });
+      //favorite players
+      $(document).ready(function() {
+         var btn = document.getElementById("fav-btn");
+
+         btn.onclick = function () {
+            var id =  Number(btn.getAttribute('data-id'));
+            var favData = detailPlayer(id);
+
+            checkData("player", id).then(function (data){
+              if (data != undefined) {
+                    console.log("Tombol deleteFav di click");
+                    deleteFav("player", id);
+                    btn.innerHTML = "Add to favorite<i class='material-icons red-text'>favorite_border</i>";
+                }else{
+                    favData.then(function (data) {
+                      console.log("Tombol saveFav di click");
+                      saveToFav("player", data);
+                      btn.innerHTML = "Remove from favorite <i class='material-icons red-text'>favorite</i>";
+                    });
+                };
+            });   
+        }
+    });
     </script>
   </body>
 </html>

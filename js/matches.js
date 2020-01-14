@@ -34,8 +34,11 @@ function Matches(data){
               `
         }
 
-        document.getElementById("update").innerHTML = "Last Update : " + dateFormat(update, "update");
-        document.getElementById("SceduledMatch").innerHTML = sceduledHTML;
+        if (page == "match" || page == "" || page == "home") {
+            document.getElementById("update").innerHTML = "Last Update : " + dateFormat(update, "update");
+            document.getElementById("SceduledMatch").innerHTML = sceduledHTML;
+        };
+        
         
 
 }

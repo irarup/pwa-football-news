@@ -67,7 +67,8 @@ function teamData(data) {
 }
 
 function playerById(data){
-      console.log(data.dateOfBirth);
+  
+      //console.log(data);
        document.getElementById("name").innerHTML = data.name;
        document.getElementById("f-name").innerHTML = data.firstName;
        document.getElementById("l-name").innerHTML = data.lastName;
@@ -75,4 +76,8 @@ function playerById(data){
        document.getElementById("date-birth").innerHTML = dateFormat(data.dateOfBirth, "birth");
        document.getElementById("nationality").innerHTML = data.nationality;
        document.getElementById("position").innerHTML = data.position;
+       document.getElementById("fav-btn").setAttribute('data-id', data.id);
+
+
+       
 }

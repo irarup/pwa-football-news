@@ -309,27 +309,48 @@ function detailPlayer(id){
   //open modal
     $('#player').modal('open');
 
-    if ('caches' in window) {
-        caches.match(base_url + 'teams/' + id).then(function(response) {
-          if (response){
-            response.json().then(function (data) {
-              teamData(data);
-              console.log("data detail player diambil dari caches");
+    //ceck data fav-players
+    var btn = document.getElementById("fav-btn");
+    var isFavorite = false;
+
+    checkData("player", id).then(function (data){
+        //console.log(data);
+        if (data != undefined) {
+              btn.innerHTML = "Remove from favorite <i class='material-icons red-text'>favorite</i>";
+              isFavorite = true;
+          }else{
+              btn.innerHTML = "Add to favorite <i class='material-icons red-text'>favorite_border</i>";
+              isFavorite = false;
+          };
+    });
+
+
+    return new Promise(function (resolve, reject) {
+        if ('caches' in window) {
+            caches.match(base_url + 'teams/' + id).then(function(response) {
+              if (response){
+                response.json().then(function (data) {
+                  playerById(data);
+                  console.log("data detail player diambil dari caches");
+                  resolve(data);
+                });
+              }
             });
-          }
-        });
-    }else{
-      event.respondWith(
-        caches.match(event.request, { ignoreSearch: true }).then(function(response) {
-            return response || fetch (event.request);
-        })
-      )
-    }
-      fetchApi('players/' + id)
-        .then(function(data) {
-           playerById(data);
-        })
-        .catch(error);
+        }else{
+          event.respondWith(
+            caches.match(event.request, { ignoreSearch: true }).then(function(response) {
+                return response || fetch (event.request);
+            })
+          )
+        }
+
+          fetchApi('players/' + id)
+            .then(function(data) {
+               playerById(data);
+               resolve(data);
+            })
+            .catch(error);
+    });
 }
 
 //Data standing

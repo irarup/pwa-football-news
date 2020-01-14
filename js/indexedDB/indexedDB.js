@@ -34,7 +34,7 @@
 function saveToFav(type, data){
     var storeName = "";
     var dataAdd = {}
-    if (type = "match") {
+    if (type == "match") {
         storeName = "favorite_matches";
         dataAdd = {
             id: data.match.id,
@@ -64,9 +64,9 @@ function saveToFav(type, data){
                 }
             }
         }
-    }else if (type = "team") {
+    }else if (type == "team") {
         storeName = "favorite_teams";
-        dataToCreate = {
+        dataAdd = {
             id: data.id,
             name: data.name,
             shortName: data.shortName,
@@ -114,10 +114,10 @@ function checkData(type, id){
     return new Promise(function (resolve, reject) {
         var storeName = "";
         dbPromised.then(function(db) {
-            if (type = "match") {
+            if (type == "match") {
                 storeName = "favorite_matches";
             
-            }else if (type = "team") {
+            }else if (type == "team") {
                storeName = "favorite_teams";
 
             }else{
@@ -135,10 +135,10 @@ function checkData(type, id){
 }
 
 function deleteFav(type, id){
-    if (type = "match") {
+    if (type == "match") {
         storeName = "favorite_matches";
     
-    }else if (type = "team") {
+    }else if (type == "team") {
        storeName = "favorite_teams";
 
     }else{
@@ -151,7 +151,7 @@ function deleteFav(type, id){
           store.delete(id);
           return tx.complete;
         }).then(function() {
-          console.log('Item from' + storeName + " with id = " + id + ' is deleted');
+          console.log('Item from ' + storeName + " with id = " + id + ' is deleted');
         });
 }
 
