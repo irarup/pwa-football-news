@@ -129,12 +129,31 @@ function checkData(type, id){
           // mengambil primary key berdasarkan isbn
           return store.get(id); 
         }).then(function (val) {
-            if (val == undefined) {
-                return false;
-            }else{
-                return true;
-            };
+            resolve(val);
         });
     });
 }
+
+function deleteFav(type, id){
+    if (type = "match") {
+        storeName = "favorite_matches";
+    
+    }else if (type = "team") {
+       storeName = "favorite_teams";
+
+    }else{
+        storeName = "favorite_players";
+    }
+
+    dbPromised.then(function(db) {
+          var tx = db.transaction(storeName, 'readwrite');
+          var store = tx.objectStore(storeName);
+          store.delete(id);
+          return tx.complete;
+        }).then(function() {
+          console.log('Item from' + storeName + " with id = " + id + ' is deleted');
+        });
+}
+
+
 

@@ -17,6 +17,8 @@ var urlsToCache = [
   "/js/nav.js",
   "/js/api.js",
   "/js/matches.js",
+  "/js/indexedDB/idb.js",
+  "/js/indexedDB/indexedDB.js",
   "/img/LaLiga.png",
   "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js",
   "https://fonts.googleapis.com/icon?family=Material+Icons"

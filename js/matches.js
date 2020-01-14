@@ -4,15 +4,15 @@ function Matches(data){
         var jumlah = matches.length;
         var sceduledHTML = "";
         var update = data.competition.lastUpdated;
+        var filter = data.filters;
 
-        
+        console.log(filter);
         //console.log(dateFormat(update));
         if (jumlah > 20) {
             jumlah = 20;
         }
 
         for (var i = 0 ; i < jumlah; i++) {
-            //console.log(i);
             sceduledHTML += `
                   <div class="col s12 m6 l6">
                     <div class="card">
@@ -27,7 +27,7 @@ function Matches(data){
                             <h6 class="center-align">Kick Off : `+dateFormat(matches[i].utcDate, "utc") +`</h6>
                       </div>
                       <div class="card-action right-align">
-                          <button data-target="detail-match"  class="btn modal-trigger match-detail orange accent-3" onclick="detailMatch(${matches[i].id});">See Detail</button>    
+                          <button data-target="detail-match"  class="btn modal-trigger match-detail orange accent-3" onclick="detailMatch(${matches[i].id});"> See Detail</button>    
                       </div>
                     </div>
                   </div>
@@ -36,13 +36,12 @@ function Matches(data){
 
         document.getElementById("update").innerHTML = "Last Update : " + dateFormat(update, "update");
         document.getElementById("SceduledMatch").innerHTML = sceduledHTML;
-
         
 
 }
 
 function MatchDetail(data){
-    console.log(data.match);
+    //console.log(data.match);
         document.getElementById("home-team").innerHTML = data.match.homeTeam.name ;
         document.getElementById("home-team").href = "./team.html?id=" + data.match.homeTeam.id;
         document.getElementById("away-team").innerHTML = data.match.awayTeam.name ;
@@ -59,6 +58,22 @@ function MatchDetail(data){
         document.getElementById("draw-away").innerHTML = data.head2head.awayTeam.draws;
         document.getElementById("lose-away").innerHTML = data.head2head.awayTeam.losses;
         document.getElementById("fav-btn").setAttribute('data-id', data.match.id);
+
+
+    var btn = document.getElementById("fav-btn");
+    var isFavorite = false;
+
+    checkData("match", data.match.id).then(function (data){
+        console.log(data);
+
+        if (data != undefined) {
+              btn.innerHTML = "Remove from favorite <i class='material-icons red-text'>favorite</i>";
+              isFavorite = true;
+          }else{
+              btn.innerHTML = "Add to favorite <i class='material-icons red-text'>favorite_border</i>";
+              isFavorite = false;
+          };
+    });
     
     var winner = data.match.score.winner;
 

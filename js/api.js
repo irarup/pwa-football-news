@@ -154,21 +154,22 @@ function getFinisedMatch() {
 
 // Daftar Match
 function matchesData(filter){
+
   // membedakan aktif botton
   var id = ['finished','live','in_play','paused'];
 
-  for (var i = 0; i < id.length; i++) {
-    if( id[i] != filter.toLowerCase()){
-      document.getElementById(id[i]).classList.remove("darken-4");
-      document.getElementById(id[i]).classList.add("accent-3");
-    }else{
-      document.getElementById(filter.toLowerCase()).classList.remove("accent-3");
-      document.getElementById(filter.toLowerCase()).classList.add("darken-4");
-    }
-  };
-
+      for (var i = 0; i < id.length; i++) {
+                if( id[i] != filter.toLowerCase()){
+                  document.getElementById(id[i]).classList.remove("darken-4");
+                  document.getElementById(id[i]).classList.add("accent-3");
+                }else{
+                  document.getElementById(filter.toLowerCase()).classList.remove("accent-3");
+                  document.getElementById(filter.toLowerCase()).classList.add("darken-4");
+                }
+            };
   //Judul
   document.getElementById("show-match").innerHTML = "Showing Of " + humanize(filter) + " Matches";
+
   if ('caches' in window) {
     caches.match(base_url + filterMathes + filter).then(function (response) {
       if (response) {
@@ -187,7 +188,7 @@ function matchesData(filter){
                   console.log("jumlahnya" + filter + "harus = " + 0);
               }else if(jumlah != 0){
                   Matches(data);
-                  console.log("Data "+ filter +"diambil dari caches" + jumlah);
+                  console.log("Data "+ filter +" diambil dari caches" + jumlah);
             }
           }
         });
@@ -204,13 +205,11 @@ function matchesData(filter){
     //Matches data menurut filter
       fetchApi(filterMathes + filter)
         .then(function(data) {
-          console.log(data);
           var matches = data.matches;
           var jumlah = matches.length;
         
           if (page == "match"){
             if (jumlah == 0){
-            console.log(jumlah);
                document.getElementById("SceduledMatch").innerHTML = `
                   <div class="red darken-1 white-text empty center-align">
                     <i class="large material-icons">sentiment_very_dissatisfied</i>
@@ -237,6 +236,7 @@ function detailMatch(id){
           if (response) {
             response.json().then(function (data) {
                   if(page == "" || page =="home" || page == "match"){
+                    console.log(data);
                     MatchDetail(data);
                     console.log("data detail match diambil dari caches");
                     resolve(data);
@@ -289,6 +289,7 @@ function getTeamDetail(){
                 event.respondWith(
                   caches.match(event.request, { ignoreSearch: true }).then(function(response) {
                       return response || fetch (event.request);
+                      resolve(data);
                   })
                 )
               }

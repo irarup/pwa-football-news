@@ -55,7 +55,7 @@
     <div id="finished-match"></div>
     </div>
     <div class="modal-footer">
-        <button data-target="detail-match"  class="btn modal-close orange lighten-3 black-text" data-id="" id="fav-btn">Add to Favorite  <i class="material-icons red-text" id="fav-icon">favorite_border</i></button>
+        <button data-target="detail-match"  class="btn orange lighten-3 black-text" data-id="" id="fav-btn"></button>
         <button data-target="detail-match"  class="btn modal-close red darken-3">Close</button>
     </div>
   </div>
@@ -91,6 +91,8 @@
     document.addEventListener("DOMContentLoaded", function() {
         getMatch();
         getFinisedMatch();
+
+        
     });
         
   // MODAL
@@ -105,23 +107,26 @@
    $(document).ready(function() {
          var btn = document.getElementById("fav-btn");
 
-
          btn.onclick = function () {
-            var id =  btn.getAttribute('data-id');
+            var id =  Number(btn.getAttribute('data-id'));
             var favData = detailMatch(id);
-            var isFavorite = "false";
-
-                if (checkData("match", id)) {
+            checkData("match", id).then(function (data){
+              if (data != undefined) {
                     console.log("Tombol deleteFav di click");
-                    
+                    deleteFav("match", id);
+                    btn.innerHTML = "Add to favorite<i class='material-icons red-text'>favorite_border</i>";
                 }else{
                     favData.then(function (data) {
                       console.log("Tombol saveFav di click");
                       saveToFav("match", data);
-                      isFavorite = true;
-                     });
+                      btn.innerHTML = "Remove from favorite <i class='material-icons red-text'>favorite</i>";
+                    });
                 };
+          });
+
+            
         }
+
     });
 
 
