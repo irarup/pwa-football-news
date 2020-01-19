@@ -37,6 +37,7 @@ function Matches(data){
         if (page == "match" || page == "" || page == "home") {
             document.getElementById("update").innerHTML = "Last Update : " + dateFormat(update, "update");
             document.getElementById("SceduledMatch").innerHTML = sceduledHTML;
+            document.getElementById('preloader').innerHTML = "";
         };
         
         
@@ -88,6 +89,8 @@ function MatchDetail(data){
          var link = "./team.html?id=" + data.match.awayTeam.id;
     }
 
+    console.log(data);
+
     var finishHTML = `
         <hr>
         <h5 class="align-center orange-text darken-4-text" >RESULT</h5>
@@ -118,6 +121,8 @@ function MatchDetail(data){
 
     if(page == "match"){
         document.getElementById("finished-match").innerHTML = finishHTML;
+    }else{
+        document.getElementById("finished-match").innerHTML = "";
     }
 }
 

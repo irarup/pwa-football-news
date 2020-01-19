@@ -51,7 +51,10 @@ function loadPage(page) {
         getFinisedMatch();
       }else if (page === "standing"){
         getStanding();
-      }
+      }else if (page === "favorite") {
+        getFavData("match");
+      };
+      
 
       if (this.status == 200) {
         content.innerHTML = xhttp.responseText;

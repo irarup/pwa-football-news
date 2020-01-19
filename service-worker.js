@@ -6,17 +6,22 @@ var urlsToCache = [
   "/index.html",
   "/team.html",
   "/manifest.json",
-  "/service-worker.js",
   "/pages/home.html",
   "/pages/match.html",
   "/pages/standing.html",
   "/pages/favorite.html",
+  "/pages/contact.html",
+  "/pages/try-notif.html",
   "/css/materialize.min.css",
   "/css/style.css",
   "/js/materialize.min.js",
   "/js/nav.js",
   "/js/api.js",
   "/js/matches.js",
+  "/js/FavResult.js",
+  "/js/team.js",
+  "/js/standing.js",
+  "js/main.js",
   "/js/indexedDB/idb.js",
   "/js/indexedDB/indexedDB.js",
   "/img/LaLiga.png",
@@ -45,7 +50,7 @@ self.addEventListener("fetch", function(event) {
     );
   } else {
     event.respondWith(
-      caches.match(event.request).then(function(response) {
+      caches.match(event.request, { ignoreSearch: true }).then(function(response) {
         return response || fetch (event.request);
       })
     )
@@ -66,4 +71,50 @@ self.addEventListener("activate", function(event) {
       );
     })
   );
+});
+
+// Notification
+// Event Click Notif
+    self.addEventListener('notificationclick', function (event) {
+        // Tutup notif
+        event.notification.close();
+        if (!event.action) {
+          // Penguna menyentuh area notifikasi diluar action
+          console.log('Notification Click.');
+          return;
+        }
+        switch (event.action) {
+          case 'yes-action':
+            console.log('Pengguna memilih action yes.');
+            // buka tab baru
+            clients.openWindow('https://google.com');
+            break;
+          case 'no-action':
+            console.log('Pengguna memilih action no');
+            break;
+          default:
+            console.log(`Action yang dipilih tidak dikenal: '${event.action}'`);
+            break;
+        }
+      });
+
+self.addEventListener('push', function(event) {
+    var body;
+    if (event.data) {
+      body = event.data.text();
+    } else {
+      body = 'Push message no payload';
+    }
+    var options = {
+      body: body,
+      icon: 'icon.png',
+      vibrate: [100, 50, 100],
+      data: {
+        dateOfArrival: Date.now(),
+        primaryKey: 1
+      }
+    };
+    event.waitUntil(
+      self.registration.showNotification('Push Notification', options)
+    );
 });

@@ -1,7 +1,10 @@
 function teamData(data) {
+  
+ var gambar = data.crestUrl.replace(/^http:\/\//i, 'https://');
+
       var teamHTML = `
         <div class="center-align">
-          <img src="${data.crestUrl}" class="logo">
+          <img src="${gambar}" class="logo">
           <h5 class="orange-text darken-4-text">${data.name}</h5>
         </div>
         <hr>

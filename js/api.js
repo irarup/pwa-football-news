@@ -1,7 +1,7 @@
-var base_url = "https://api.football-data.org/v2/";
-var dataMatch = "competitions/2014/matches?status=SCHEDULED";
-var filterMathes = "competitions/2014/matches?status=";
-var dataStanding = "competitions/2014/standings";
+const base_url = "https://api.football-data.org/v2/";
+const dataMatch = "competitions/2014/matches?status=SCHEDULED";
+const filterMathes = "competitions/2014/matches?status=";
+const dataStanding = "competitions/2014/standings";
 
 // Fetch function
 function status (response) {
@@ -144,8 +144,7 @@ function getFinisedMatch() {
 
     fetchApi(filterMathes + "FINISHED")
       .then(function(data) {
-        if(page == "match"){
-          
+        if(page == "match"){  
           Matches(data);
         }
       })

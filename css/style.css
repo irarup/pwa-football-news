@@ -56,6 +56,13 @@ h3{
 	padding: 15px;
 }
 
+.favTeamLogo{
+	display: inline-block !important;
+	height: 200px;
+	width: auto !important;
+	margin: 10px;
+}
+
 @media only screen and (max-width: 815px) {
 	#finished i, #in_play i, #live i, #paused i {
 		display: none;
@@ -74,3 +81,17 @@ h3{
 	}
 
 }
+
+@media only screen and (max-width: 992px) {
+	#th-large {
+		display: none;
+	}
+
+}
+
+@media only screen and (min-width: 993px) {
+	#th-small {
+		display: none;
+	}
+}
+

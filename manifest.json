@@ -1,16 +1,22 @@
 {
-    "name": "My First PWA",
-    "short_name": "My PWA",
-    "description": "Aplikasi PWA pertama saya",
+    "name": "Aplikasi Football News",
+    "short_name": "F-News",
+    "description": "Made by : Ira Rupaida",
     "start_url": "index.html",
     "display": "standalone",
-    "background_color": "#00897B",
-    "theme_color": "#00897B",
+    "background_color": "#f57c00 ",
+    "theme_color": "#424242",
     "icons": [
         {
             "src": "icon.png",
             "sizes": "512x512",
             "type": "image/png"
+        },
+        {
+          "src": "icon.png",
+          "type": "image/png",
+          "sizes": "192x192"
         }
-    ]
+    ],
+    "gcm_sender_id": "978901788976"
 }
