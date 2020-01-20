@@ -17,7 +17,7 @@ function Matches(data){
                   <div class="col s12 m6 l6">
                     <div class="card">
                       <div class="card-image">
-                        <img src="../img/LaLiga.png">
+                        <img src="/pwa-football-news/img/LaLiga.png">
                       </div>
                       <div class="card-content">
                         <span class="card-title flow-text center-align orange-text darken-4-text">${matches[i].homeTeam.name} vs ${matches[i].awayTeam.name}</span>
