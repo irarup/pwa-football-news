@@ -1,73 +1,53 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js');
-
-if (workbox) {
-    console.log(`Workbox berhasil dimuat`);
-
-} else {
-    console.log(`Workbox gagal dimuat`);
-}
-
-workbox.precaching.precacheAndRoute([
-    { url: '/', revision: '1' },
-    { url: '/icon.png', revision: '1' },
-    { url: '/nav.html', revision: '1' },
-    { url: '/index.html', revision: '1' },
-    { url: '/team.html', revision: '1' },
-    { url: '/manifest.json', revision: '1' },
-    { url: '/css/materialize.min.css', revision: '1' },
-    { url: '/css/style.css', revision: '1' },
-    { url: '/img/LaLiga.png', revision: '1' },
-    "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"
-]);
-
-// Menyimpan file didalam folder pages
-workbox.routing.registerRoute(
-  new RegExp('/pages/'),
-  workbox.strategies.staleWhileRevalidate({
-        cacheName: 'pages'
-    })
-);
-
-// Menyimpan filedalam folder js
-workbox.routing.registerRoute(
-  new RegExp('/js/'),
-  workbox.strategies.staleWhileRevalidate({
-        cacheName: 'javascript'
-    })
-);
-
-workbox.routing.registerRoute(
-  /\.(?:png|gif|jpg|jpeg|svg)$/,
-  workbox.strategies.cacheFirst({
-    cacheName: 'images',
-    plugins: [
-      new workbox.expiration.Plugin({
-        maxEntries: 60,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 hari
-      }),
-    ],
-  }),
-);
-
-// Menyimpan Google font
-workbox.routing.registerRoute(
-  /^https:\/\/fonts\.gstatic\.com/,
-  workbox.strategies.cacheFirst({
-    cacheName: 'google-fonts-webfonts',
-    plugins: [
-      new workbox.cacheableResponse.Plugin({
-        statuses: [0, 200],
-      }),
-      new workbox.expiration.Plugin({
-        maxAgeSeconds: 60 * 60 * 24 * 365,
-        maxEntries: 30,
-      }),
-    ],
-  })
-);
+	{ url: '/pages/home.html', revision: '1' },
+    { url: '/pages/match.html', revision: '1' },
+    { url: '/pages/standing.html', revision: '1' },
+    { url: '/pages/favorite.html', revision: '1' },
+    { url: '/pages/contact.html', revision: '1' },
+    { url: '/pages/try-notif.html', revision: '1' },
+    
+    { url: '/js/materialize.min.js', revision: '1' },
+    { url: '/js/nav.js', revision: '1' },
+    { url: '/js/api.js', revision: '1' },
+    { url: '/js/matches.js', revision: '1' },
+    { url: '/js/FavResult.js', revision: '1' },
+    { url: '/js/team.js', revision: '1' },
+    { url: '/js/standing.js', revision: '1' },
+    { url: 'js/main.js', revision: '1' },
+    { url: '/js/indexedDB/idb.js', revision: '1' },
+    { url: '/js/indexedDB/indexedDB.js', revision: '1' },
 
 
-  
+
+const CACHE_NAME = "football-news-v3";
+var urlsToCache = [
+  "/",
+  "/icon.png",
+  "/nav.html",
+  "/index.html",
+  "/team.html",
+  "/manifest.json",
+  "/pages/home.html",
+  "/pages/match.html",
+  "/pages/standing.html",
+  "/pages/favorite.html",
+  "/pages/contact.html",
+  "/pages/try-notif.html",
+  "/css/materialize.min.css",
+  "/css/style.css",
+  "/js/materialize.min.js",
+  "/js/nav.js",
+  "/js/api.js",
+  "/js/matches.js",
+  "/js/FavResult.js",
+  "/js/team.js",
+  "/js/standing.js",
+  "js/main.js",
+  "/js/indexedDB/idb.js",
+  "/js/indexedDB/indexedDB.js",
+  "/img/LaLiga.png",
+  "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js",
+  "https://fonts.googleapis.com/icon?family=Material+Icons"
+  ];
 
 self.addEventListener("install", function(event) {
   event.waitUntil(
