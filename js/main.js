@@ -6,7 +6,7 @@
       }
     // Register service worker
     function registerServiceWorker() {
-      return navigator.serviceWorker.register('pwa-football-news/service-worker.js')
+      return navigator.serviceWorker.register('/service-worker.js')
         .then(function (registration) {
           console.log('Registrasi service worker berhasil.');
           return registration;
