@@ -17,8 +17,16 @@ workbox.precaching.precacheAndRoute([
     { url: '/css/materialize.min.css', revision: '1' },
     { url: '/css/style.css', revision: '1' },
     { url: '/img/LaLiga.png', revision: '1' },
-    "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"
+    "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js", {
+      ignoreUrlParametersMatching: [/.*/]
+    }
 ]);
+
+//API nya
+workbox.routing.registerRoute(     
+    new RegExp('https://api.football-data.org/v2/'),
+    workbox.strategies.staleWhileRevalidate()
+);
 
 // Menyimpan file didalam folder pages
 workbox.routing.registerRoute(
