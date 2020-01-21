@@ -8,24 +8,28 @@ if (workbox) {
 }
 
 workbox.precaching.precacheAndRoute([
-    { url: '/', revision: '1' },
-    { url: '/icon.png', revision: '1' },
-    { url: '/nav.html', revision: '1' },
-    { url: '/index.html', revision: '1' },
-    { url: '/team.html', revision: '1' },
-    { url: '/manifest.json', revision: '1' },
-    { url: '/css/materialize.min.css', revision: '1' },
-    { url: '/css/style.css', revision: '1' },
-    { url: '/img/LaLiga.png', revision: '1' },
-    "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js", {
-      ignoreUrlParametersMatching: [/.*/]
+        { url: '/', revision: '2' },
+        { url: '/icon.png', revision: '2' },
+        { url: '/nav.html', revision: '2' },
+        { url: '/index.html', revision: '2' },
+        { url: '/team.html', revision: '2' },
+        { url: '/manifest.json', revision: '2' },
+        { url: '/css/materialize.min.css', revision: '2' },
+        { url: '/css/style.css', revision: '2' },
+        { url: '/img/LaLiga.png', revision: '2' },
+        "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"
+    ], 
+    {
+       ignoreUrlParametersMatching: [/.*/]
     }
-]);
+);
 
 //API nya
-workbox.routing.registerRoute(     
-    new RegExp('https://api.football-data.org/v2/'),
-    workbox.strategies.staleWhileRevalidate()
+workbox.routing.registerRoute(
+  new RegExp('https://api.football-data.org/v2/'),
+  workbox.strategies.staleWhileRevalidate({
+        cacheName: 'dataApi'
+    })
 );
 
 // Menyimpan file didalam folder pages
@@ -76,32 +80,6 @@ workbox.routing.registerRoute(
 
 
   
-
-// self.addEventListener("install", function(event) {
-//   event.waitUntil(
-//     caches.open(CACHE_NAME).then(function(cache) {
-//       return cache.addAll(urlsToCache);
-//     })
-//   );
-// });
-
-
-
-
-// self.addEventListener("activate", function(event) {
-//   event.waitUntil(
-//     caches.keys().then(function(cacheNames) {
-//       return Promise.all(
-//         cacheNames.map(function(cacheName) {
-//           if (cacheName != CACHE_NAME) {
-//             console.log("ServiceWorker: cache " + cacheName + " dihapus");
-//             return caches.delete(cacheName);
-//           }
-//         })
-//       );
-//     })
-//   );
-// });
 
 // Notification
 // Event Click Notif
